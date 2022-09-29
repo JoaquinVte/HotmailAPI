@@ -83,7 +83,7 @@ public class EmailUtil {
             BodyPart messageBodyPart = new MimeBodyPart();
 
             // Fill the message
-            messageBodyPart.setText(body);
+            messageBodyPart.setContent(body,"text/html");
 
             // Create a multipart message for attachment
             Multipart multipart = new MimeMultipart();
@@ -91,25 +91,24 @@ public class EmailUtil {
             // Set text message part
             multipart.addBodyPart(messageBodyPart);
 
-            // Second part is attachment
-            messageBodyPart = new MimeBodyPart();
-            String filename = "abc.txt";
-            DataSource source = new FileDataSource(filename);
-            messageBodyPart.setDataHandler(new DataHandler(source));
-            messageBodyPart.setFileName(filename);
-            multipart.addBodyPart(messageBodyPart);
-
+            for(File file : files) {
+                messageBodyPart = new MimeBodyPart();
+                DataSource source = new FileDataSource(file);
+                messageBodyPart.setDataHandler(new DataHandler(source));
+                messageBodyPart.setFileName(file.getName());
+                multipart.addBodyPart(messageBodyPart);
+            }
 
             // Send the complete message parts
             msg.setContent(multipart);
 
             // Send message
             Transport.send(msg);
-            System.out.println("EMail Sent Successfully with attachment!!");
+            LOGGER.info("EMail Sent Successfully with attachment!!");
         }catch (MessagingException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE,e.getMessage());
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE,e.getMessage());
         }
     }
     /**

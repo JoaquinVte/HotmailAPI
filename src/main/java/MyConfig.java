@@ -11,8 +11,8 @@ public class MyConfig {
 
     private static MyConfig instancia = new MyConfig();
 
-    private String defaultFile = "src/custom.properties";
-    private String appFile = "src/app.properties";
+    private String defaultFile = "src/app.properties";
+    private String appFile = "src/custom.properties";
     private Properties properties;
 
     private String key = "afsdlfj498750234?78-=234";
