@@ -19,7 +19,7 @@ class TLSEmailTest {
 
     @Test
     @DisplayName("Envio de mail con adjuntos")
-    void testSend() {
+    void sendWithAttachement() {
         assertDoesNotThrow(() -> {
             List<File> files = new ArrayList<>();
             files.add(new File("app.properties"));
@@ -27,5 +27,10 @@ class TLSEmailTest {
 
             TLSEmail.getInstance().send("joaalsai@gmail.com","Prueba con adjuntos","Test de prueba",files);
         });
+    }
+    @Test
+    @DisplayName("Envio de mail con imagen")
+    void sendWithImage() {
+        assertDoesNotThrow(() -> TLSEmail.getInstance().sendWithImage("joaalsai@gmail.com","Prueba con imagen","Test de prueba"));
     }
 }

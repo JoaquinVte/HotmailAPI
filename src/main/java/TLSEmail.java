@@ -30,6 +30,10 @@ public class TLSEmail {
         prepare();
         EmailUtil.sendAttachmentEmail(session, toEmail,subject, body,files);
     }
+    public void sendWithImage(String toEmail, String subject, String body){
+        prepare();
+        EmailUtil.sendImageEmail(session, toEmail,subject, body);
+    }
 
     private void prepare(){
         final String fromEmail = MyConfig.getInstancia().getEmail();

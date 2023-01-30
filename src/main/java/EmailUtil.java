@@ -125,9 +125,9 @@ class EmailUtil {
             msg.addHeader("format", "flowed");
             msg.addHeader("Content-Transfer-Encoding", "8bit");
 
-            msg.setFrom(new InternetAddress("no_reply@example.com", "NoReply-JD"));
+            msg.setFrom(new InternetAddress(MyConfig.getInstancia().getEmail(), MyConfig.getInstancia().getReplyName()));
 
-            msg.setReplyTo(InternetAddress.parse("no_reply@example.com", false));
+            msg.setReplyTo(InternetAddress.parse(MyConfig.getInstancia().getEmail(), false));
 
             msg.setSubject(subject, "UTF-8");
 
@@ -153,13 +153,14 @@ class EmailUtil {
             messageBodyPart.setDataHandler(new DataHandler(source));
             messageBodyPart.setFileName(filename);
             //Trick is to add the content-id header here
-            messageBodyPart.setHeader("Content-ID", "image_id");
+            messageBodyPart.setHeader("Content-ID", "<image_id>");
             multipart.addBodyPart(messageBodyPart);
 
             //third part for displaying image in the email body
             messageBodyPart = new MimeBodyPart();
             messageBodyPart.setContent("<h1>Attached Image</h1>" +
-                    "<img src='cid:image_id'>", "text/html");
+                    "<img src=\"cid:image_id\">"+
+                    "<h2>FIN</h2>", "text/html");
             multipart.addBodyPart(messageBodyPart);
 
             //Set the multipart message to the email message
