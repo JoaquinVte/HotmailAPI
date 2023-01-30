@@ -10,7 +10,17 @@ import javax.mail.Session;
 public class TLSEmail {
 
     private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-    Session session;
+    private Session session;
+
+    private static TLSEmail instance;
+
+    private TLSEmail(){
+    }
+    public static TLSEmail getInstance(){
+        if(instance==null)
+            instance = new TLSEmail();
+        return instance;
+    }
 
     public void send(String toEmail, String subject, String body){
         prepare();

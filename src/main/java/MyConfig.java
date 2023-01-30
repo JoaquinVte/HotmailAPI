@@ -7,12 +7,12 @@ import java.util.Properties;
 
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 
-public class MyConfig {
+class MyConfig {
 
     private static MyConfig instancia = new MyConfig();
 
-    private String defaultFile = "src/app.properties";
-    private String appFile = "src/custom.properties";
+    private String defaultFile = "app.properties";
+    private String appFile = "custom.properties";
     private Properties properties;
 
     private String key = "afsdlfj498750234?78-=234";
